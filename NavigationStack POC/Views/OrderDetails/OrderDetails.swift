@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OrderDetails: View {
-    @ObservedObject var viewModel: OrderDetailsModel
+    @StateObject var viewModel: OrderDetailsModel
     @State var showPopup: Bool = false
     
     var body: some View {
