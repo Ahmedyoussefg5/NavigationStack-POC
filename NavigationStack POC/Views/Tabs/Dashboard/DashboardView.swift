@@ -24,7 +24,9 @@ struct DashboardView: View {
                     LazyVStack {
                         ForEach(viewModel.ordersList, id: \.self) { item in
                             Button {
-                                viewModel.coordinator.push(page: HomeRouter.paymetFlow(.root), animated: false)
+                                
+//                                viewModel.coordinator.push(page: HomeRouter.paymetFlow(.root), animated: false)
+                                viewModel.coordinator.presentSheet(.orderDetails(3))
                             } label: {
                                 Text(item)
                             }

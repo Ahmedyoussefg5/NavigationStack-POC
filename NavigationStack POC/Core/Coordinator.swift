@@ -14,8 +14,8 @@ protocol CoordinatorP: ObservableObject {
     associatedtype view: View
     
     var path: NavigationPath { get set }
-    var sheet: Sheet? { get set }
-    var fullScreenCover: FullScreenCover? { get set }
+    var sheet: Page? { get set }
+    var fullScreenCover: Page? { get set }
     
     func build(page: Page, with coordinator: coordinator) -> view
     
@@ -25,9 +25,9 @@ protocol CoordinatorP: ObservableObject {
     
     func popToRoot()
     
-    func presentSheet(_ sheet: Sheet)
+    func presentSheet(_ sheet: Page)
     
-    func presentFullScreenCover(_ cover: FullScreenCover)
+    func presentFullScreenCover(_ cover: Page)
     
     func dismissSheet()
     
@@ -55,11 +55,11 @@ extension CoordinatorP {
         path.removeLast(path.count)
     }
     
-    func presentSheet(_ sheet: Sheet) {
+    func presentSheet(_ sheet: Page) {
         self.sheet = sheet
     }
     
-    func presentFullScreenCover(_ cover: FullScreenCover) {
+    func presentFullScreenCover(_ cover: Page) {
         self.fullScreenCover = cover
     }
     
@@ -76,15 +76,15 @@ extension CoordinatorP {
 class Coordinator: CoordinatorP {
     
     @Published var path: NavigationPath = NavigationPath()
-    @Published var sheet: Sheet?
-    @Published var fullScreenCover: FullScreenCover?
+    @Published var sheet: HomeRouter?
+    @Published var fullScreenCover: HomeRouter?
     
     lazy var paymetCoordinator = PaymentCoordinator()
     
     @AppStorage("isLoggedIn")
     var isLoggedIn: Bool = true
     
-    init(path: NavigationPath, sheet: Sheet? = nil, fullScreenCover: FullScreenCover? = nil) {
+    init(path: NavigationPath, sheet: HomeRouter? = nil, fullScreenCover: HomeRouter? = nil) {
         self.path = path
         self.sheet = sheet
         self.fullScreenCover = fullScreenCover
@@ -99,33 +99,19 @@ class Coordinator: CoordinatorP {
             paymetCoordinator.build(page: flow, with: paymetCoordinator)
         }
     }
-    
-    @ViewBuilder
-    func buildSheet(sheet: Sheet, with coordinator: Coordinator) -> some View {
-        switch sheet {
-        case .still: EmptyView()
-        }
-    }
-    
-    @ViewBuilder
-    func buildCover(cover: FullScreenCover, with coordinator: Coordinator) -> some View {
-        switch cover {
-        case .still: EmptyView()
-        }
-    }
 }
 
 @MainActor
 class Coordinator2: CoordinatorP {
     
     @Published var path: NavigationPath = NavigationPath()
-    @Published var sheet: Sheet?
-    @Published var fullScreenCover: FullScreenCover?
+    @Published var sheet: HomeRouter2?
+    @Published var fullScreenCover: HomeRouter2?
     
     @AppStorage("isLoggedIn")
     var isLoggedIn: Bool = true
     
-    init(path: NavigationPath, sheet: Sheet? = nil, fullScreenCover: FullScreenCover? = nil) {
+    init(path: NavigationPath, sheet: HomeRouter2? = nil, fullScreenCover: HomeRouter2? = nil) {
         self.path = path
         self.sheet = sheet
         self.fullScreenCover = fullScreenCover
@@ -138,27 +124,13 @@ class Coordinator2: CoordinatorP {
         case .orderDetails(let id): Text("Order Details \(id)")
         }
     }
-    
-    @ViewBuilder
-    func buildSheet(sheet: Sheet, with coordinator: Coordinator2) -> some View {
-        switch sheet {
-        case .still: EmptyView()
-        }
-    }
-    
-    @ViewBuilder
-    func buildCover(cover: FullScreenCover, with coordinator: Coordinator2) -> some View {
-        switch cover {
-        case .still: EmptyView()
-        }
-    }
 }
 
 @MainActor
 class PaymentCoordinator: CoordinatorP {
     @Published var path: NavigationPath = NavigationPath()
-    @Published var sheet: Sheet?
-    @Published var fullScreenCover: FullScreenCover?
+    @Published var sheet: PaymetFlow?
+    @Published var fullScreenCover: PaymetFlow?
     
     @ViewBuilder
     func build(page: PaymetFlow, with coordinator: PaymentCoordinator) -> some View {

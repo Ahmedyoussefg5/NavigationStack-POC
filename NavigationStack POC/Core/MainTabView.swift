@@ -19,10 +19,10 @@ struct MainTabView: View {
                         coordinator.build(page: page, with: coordinator)
                     }
                     .sheet(item: $coordinator.sheet) { sheet in
-                        coordinator.buildSheet(sheet: sheet, with: coordinator)
+                        coordinator.build(page: sheet, with: coordinator)
                     }
-                    .fullScreenCover(item: $coordinator.fullScreenCover) { item in
-                        coordinator.buildCover(cover: item, with: coordinator)
+                    .fullScreenCover(item: $coordinator.fullScreenCover) { cover in
+                        coordinator.build(page: cover, with: coordinator)
                     }
             }
             .tabItem {
@@ -36,11 +36,11 @@ struct MainTabView: View {
                     .navigationDestination(for: HomeRouter2.self) { page in
                         coordinator2.build(page: page, with: coordinator2)
                     }
-                    .sheet(item: $coordinator.sheet) { sheet in
-                        coordinator2.buildSheet(sheet: sheet, with: coordinator2)
+                    .sheet(item: $coordinator2.sheet) { sheet in
+                        coordinator2.build(page: sheet, with: coordinator2)
                     }
-                    .fullScreenCover(item: $coordinator.fullScreenCover) { item in
-                        coordinator2.buildCover(cover: item, with: coordinator2)
+                    .fullScreenCover(item: $coordinator2.fullScreenCover) { item in
+                        coordinator2.build(page: item, with: coordinator2)
                     }
             }
             .tabItem {

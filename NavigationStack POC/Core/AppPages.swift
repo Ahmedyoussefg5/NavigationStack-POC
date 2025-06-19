@@ -8,7 +8,21 @@
 import Foundation
 import Combine
 
-enum HomeRouter: Hashable {
+enum HomeRouter: Hashable, Identifiable {
+    var id: String {
+        switch self {
+        case .dashboard:
+            return "dashboard"
+        case .orderDetails(let id):
+            return "orderDetails_\(id)"
+        case .paymetFlow(let flow):
+            switch flow {
+            case .root:
+                return "paymetFlowRoot"
+            }
+        }
+    }
+    
     case dashboard
     case orderDetails(Int)
     case paymetFlow(PaymetFlow)
@@ -18,23 +32,16 @@ enum PaymetFlow: Hashable {
     case root
 }
 
-enum HomeRouter2: Hashable {
+enum HomeRouter2: Hashable, Identifiable {
+    var id: String {
+        switch self {
+        case .dashboard:
+            return "dashboard"
+        case .orderDetails(let id):
+            return "orderDetails_\(id)"
+        }
+    }
+    
     case dashboard
     case orderDetails(Int)
-}
-
-enum Sheet: String, Identifiable {
-    var id: String {
-        self.rawValue
-    }
-    
-    case still
-}
-
-enum FullScreenCover: String, Identifiable {
-    var id: String {
-        self.rawValue
-    }
-    
-    case still
 }

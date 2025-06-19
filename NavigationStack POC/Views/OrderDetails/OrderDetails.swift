@@ -15,7 +15,9 @@ struct OrderDetails: View {
         RootView(viewModel: viewModel) {
             VStack(spacing: .zero) {
                 VStack(spacing: .zero) {
-                    backView
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(.red)
+                        .frame(width: 300, height: 200)
                 }
                 .padding(.bottom, 16)
             }
@@ -25,30 +27,5 @@ struct OrderDetails: View {
             }
         }
         .toolbar(.hidden, for: .tabBar)
-    }
-    
-    var backView: some View {
-        HStack(spacing: 16) {
-            Button {
-                viewModel.coordinator.pop(animated: false)
-            } label: {
-                Image(.vector22)
-                    .resizable()
-                    .padding(.horizontal, 13)
-                    .padding(.vertical, 10)
-                    .background(Color.white)
-                    .frame(width: 40, height: 40)
-                    .cornerRadius(8)
-            }
-            
-            Text("Order Details".localize)
-                .fontSemibold(size: 24)
-                .foregroundColor(.mainBlack)
-                .multilineTextAlignment(.leading)
-            
-            Spacer()
-        }
-        .padding(.leading, 16)
-        .padding(.bottom, 16)
     }
 }
