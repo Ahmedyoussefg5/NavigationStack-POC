@@ -9,8 +9,10 @@ import SwiftUI
 
 struct CoordinatorView: View {
     @StateObject private var coordinator = Coordinator(path: .init())
+    @StateObject private var coordinator2 = Coordinator2(path: .init())
     
     var body: some View {
+        let _ = Self._printChanges()
         ZStack {
             tabView
                 .transition(.move(edge: .trailing))
@@ -19,6 +21,6 @@ struct CoordinatorView: View {
     }
     
     var tabView: some View {
-        MainTabView(coordinator: coordinator)
+        MainTabView(coordinator: coordinator, coordinator2: coordinator2)
     }
 }

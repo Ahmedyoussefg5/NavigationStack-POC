@@ -9,12 +9,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @StateObject var coordinator: Coordinator
-    @StateObject var coordinator2: Coordinator
-    
-    init(coordinator: any CoordinatorP) {
-        _coordinator = .init(wrappedValue: .init(path: coordinator.path))
-        _coordinator2 = .init(wrappedValue: .init(path: coordinator.path))
-    }
+    @StateObject var coordinator2: Coordinator2
     
     var body: some View {
         TabView {
@@ -37,15 +32,15 @@ struct MainTabView: View {
             .toolbarBackground(.visible, for: .tabBar)
             
             NavigationStack(path: $coordinator2.path) {
-                coordinator.build(page: .dashboard, with: coordinator)
-                    .navigationDestination(for: HomeRouter.self) { page in
-                        coordinator.build(page: page, with: coordinator)
+                coordinator2.build(page: .dashboard, with: coordinator2)
+                    .navigationDestination(for: HomeRouter2.self) { page in
+                        coordinator2.build(page: page, with: coordinator2)
                     }
                     .sheet(item: $coordinator.sheet) { sheet in
-                        coordinator.buildSheet(sheet: sheet, with: coordinator)
+                        coordinator2.buildSheet(sheet: sheet, with: coordinator2)
                     }
                     .fullScreenCover(item: $coordinator.fullScreenCover) { item in
-                        coordinator.buildCover(cover: item, with: coordinator)
+                        coordinator2.buildCover(cover: item, with: coordinator2)
                     }
             }
             .tabItem {

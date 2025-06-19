@@ -132,22 +132,22 @@ class Coordinator2: CoordinatorP {
     }
     
     @ViewBuilder
-    func build(page: HomeRouter2, with coordinator: Coordinator) -> some View {
+    func build(page: HomeRouter2, with coordinator: Coordinator2) -> some View {
         switch page {
-        case .dashboard: DashboardView(viewModel: .init(coordinator: coordinator))
-        case .orderDetails(let id): OrderDetails(viewModel: .init(coordinator: coordinator, orderId: id))
+        case .dashboard: Text("Dashboard 2")
+        case .orderDetails(let id): Text("Order Details \(id)")
         }
     }
     
     @ViewBuilder
-    func buildSheet(sheet: Sheet, with coordinator: Coordinator) -> some View {
+    func buildSheet(sheet: Sheet, with coordinator: Coordinator2) -> some View {
         switch sheet {
         case .still: EmptyView()
         }
     }
     
     @ViewBuilder
-    func buildCover(cover: FullScreenCover, with coordinator: Coordinator) -> some View {
+    func buildCover(cover: FullScreenCover, with coordinator: Coordinator2) -> some View {
         switch cover {
         case .still: EmptyView()
         }
