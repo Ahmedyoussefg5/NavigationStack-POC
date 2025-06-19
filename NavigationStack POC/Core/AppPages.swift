@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-enum AppPages: Hashable {
-    static func == (lhs: AppPages, rhs: AppPages) -> Bool {
+enum HomeRouter: Hashable {
+    static func == (lhs: HomeRouter, rhs: HomeRouter) -> Bool {
         switch (lhs, rhs) {
         case (.dashboard, .dashboard):
             return true
@@ -31,7 +31,31 @@ enum AppPages: Hashable {
         
     case dashboard
     case orderDetails(Int)
-    
+}
+
+enum HomeRouter2: Hashable {
+    static func == (lhs: HomeRouter2, rhs: HomeRouter2) -> Bool {
+        switch (lhs, rhs) {
+        case (.dashboard, .dashboard):
+            return true
+        case (.orderDetails, .orderDetails):
+            return true
+        default:
+            return false
+        }
+    }
+
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case .dashboard:
+            hasher.combine("dashboard")
+        case .orderDetails:
+            hasher.combine("orderDetails")
+        }
+    }
+        
+    case dashboard
+    case orderDetails(Int)
 }
 
 enum Sheet: String, Identifiable {

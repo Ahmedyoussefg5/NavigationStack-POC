@@ -24,7 +24,7 @@ struct DashboardView: View {
                     LazyVStack {
                         ForEach(viewModel.ordersList, id: \.self) { item in
                             Button {
-                                viewModel.coordinator.push(page: .orderDetails(item.int ?? .zero), animated: false)
+                                viewModel.coordinator.push(page: HomeRouter.orderDetails(item.int ?? .zero), animated: false)
                             } label: {
                                 Text(item)
                             }
@@ -43,6 +43,6 @@ struct DashboardView: View {
     }
 }
 
-#Preview {
-    DashboardView(viewModel: .init(coordinator: .init()))
-}
+//#Preview {
+//    DashboardView(viewModel: .init(coordinator: .init()))
+//}

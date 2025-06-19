@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CoordinatorView: View {
-    @StateObject private var coordinator = Coordinator()
+    @StateObject private var coordinator = Coordinator(path: .init())
     
     var body: some View {
         ZStack {

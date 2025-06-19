@@ -33,7 +33,7 @@ final class Repository: @unchecked Sendable {
     }
     
     func request<U: BaseCodable & Sendable>(_ model: U.Type, _ request: APIRouter) async -> Result<U, Error> {
-        
+
         await network
             .request(request, decodeTo: U.self)
             .pipeThrough(handleRequestResponse)
